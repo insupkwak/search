@@ -1,5 +1,3 @@
-// script.js
-
 async function searchNews(query) {
     try {
         const response = await fetch(`/search?query=${query}`);
@@ -28,6 +26,10 @@ async function searchNews(query) {
             });
         }
 
+        // 결과가 있으면 results-container를 보이게 함
+        const resultsContainer = document.getElementById('results-container');
+        resultsContainer.style.display = 'block';
+
     } catch (error) {
         console.error('Error fetching search results:', error);
         alert('An error occurred while fetching search results. Please try again.');
@@ -35,32 +37,31 @@ async function searchNews(query) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const searchButton = document.getElementById('search-button');
-    const breakingNewsButton = document.getElementById('breaking-news-button');
-    const searchInput = document.getElementById('search-query');
+    const searchButton = document.querySelector('.search-box button');
+    const newsButton = document.getElementById('news-button');
 
     searchButton.addEventListener('click', function() {
-        const query = searchInput.value;
-        if (!query) {
+        const query = document.getElementById('search-query').value;
+        if (query) {
+            searchNews(query);
+        } else {
             alert('Please enter a search query');
-            return;
         }
-        searchNews(query);
     });
 
-    breakingNewsButton.addEventListener('click', function() {
-        const query = '속보';
-        searchNews(query);
+    newsButton.addEventListener('click', function() {
+        searchNews('속보');
     });
 
+    const searchInput = document.getElementById('search-query');
     searchInput.addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
-            const query = searchInput.value;
-            if (!query) {
+            const query = document.getElementById('search-query').value;
+            if (query) {
+                searchNews(query);
+            } else {
                 alert('Please enter a search query');
-                return;
             }
-            searchNews(query);
         }
     });
 });

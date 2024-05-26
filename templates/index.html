@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Search</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
 </head>
 <body>
     <div class="container">
         <div class="search-box">
             <input type="text" id="search-query" placeholder="Enter search query">
-            <button id="search-button">Search</button>
-            <button id="breaking-news-button">Issue</button>
+            <button>Search</button>
+            <button id="news-button">Breaking News</button>
         </div>
-        <div class="results-container">
+        <div class="results-container" style="display: none;" id="results-container">
             <div class="results" id="naver-results">
                 <h2>Naver News</h2>
                 <table>
