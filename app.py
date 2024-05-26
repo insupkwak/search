@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify, render_template
 import requests
 from bs4 import BeautifulSoup
-from flask_cors import CORS
+
 
 app = Flask(__name__)
-CORS(app)  # CORS 설정 추가
+
 
 def crawl_naver_news(search_query):
     base_url = "https://search.naver.com/search.naver"
