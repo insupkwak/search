@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="search-query" placeholder="Enter search query">
+            <button id="search-button">Search</button>
+            <button id="breaking-news-button">Issue</button>
+        </div>
+        <div class="results-container">
+            <div class="results" id="naver-results">
+                <h2>Naver News</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>News</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="naver-results-body">
+                    </tbody>
+                </table>
+            </div>
+            <div class="results" id="daum-results">
+                <h2>Daum News</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>News</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="daum-results-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

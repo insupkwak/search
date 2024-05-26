@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f4;
+}
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin-top: 50px;
+}
+
+
+.search-box {
+    display: flex;
+    justify-content: space-between; /* 좌우 정렬 */
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 5px; /* 우측 마진 추가 */
+}
+
+.search-box button {
+    padding: 10px;
+    width: 20% ;
+    font-size: 16px;
+    margin-left: 5px; /* 좌측 마진 추가 */
+}
+.results-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.results {
+    background: white;
+    margin: 10px 0;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.results h2 {
+    margin-top: 0;
+}
+.results table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.results th, .results td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+.results th {
+    background-color: #f4f4f4;
+}
+.results a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
