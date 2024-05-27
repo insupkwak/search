@@ -31,7 +31,7 @@ def check_url_blocked(url):
 def crawl_naver_news(search_query):
 
     base_url = "https://search.naver.com/search.naver"
-    params = {"query": search_query}
+    params = {"query": search_query, "where": "news"}
      
     response = requests.get(base_url, params=params)
     soup = BeautifulSoup(response.text, 'html.parser')
