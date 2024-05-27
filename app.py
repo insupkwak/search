@@ -15,6 +15,25 @@ def send_message(msg):
     requests.post(discord, data=message)
 
 
+def check_url_blocked(url):
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            send_message("URL is accessible.")
+        else:
+            send_message(f"URL is blocked. Status code: {response.status_code}")
+    except requests.exceptions.RequestException as e:
+        send_message("An error occurred:", e)
+
+# 테스트할 URL 입력
+url_to_check1 = "https://www.naver.com"
+url_to_check2 = "https://search.naver.com/search.naver"
+
+# URL 차단 여부 확인
+check_url_blocked(url_to_check1)
+check_url_blocked(url_to_check2)
+
+
 def crawl_naver_news(search_query):
 
     base_url = "https://search.naver.com/search.naver"
