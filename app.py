@@ -28,12 +28,12 @@ def check_url_blocked(url):
 # 테스트할 URL 입력
 url_to_check1 = "https://www.naver.com"
 url_to_check2 = "https://search.naver.com/search.naver"
-url_to_check3 = "https://www.google.com/search?q=%EC%9E%A5%EA%B8%88%EC%83%81%EC%84%A0&tbm=nws"
+
 
 # URL 차단 여부 확인
 check_url_blocked(url_to_check1)
 check_url_blocked(url_to_check2)
-check_url_blocked(url_to_check3)
+
 
 
 def crawl_naver_news(search_query):
@@ -41,7 +41,7 @@ def crawl_naver_news(search_query):
     base_url = "https://search.naver.com/search.naver"
     params = {"query": search_query, "where": "news"}
      
-    response = requests.get(base_url, params=params)
+    response = requests.get(base_url, params=params, headers={'User-agent': 'Mozilla/5.0'})
     soup = BeautifulSoup(response.text, 'html.parser')
 
     results = []
@@ -75,7 +75,7 @@ def crawl_daum_news(search_query):
     base_url = "https://search.daum.net/search"
     params = {"nil_suggest": "btn", "w": "news", "DA": "SBC", "q": search_query}
     
-    response = requests.get(base_url, params=params)
+    response = requests.get(base_url, params=params, headers={'User-agent': 'Mozilla/5.0'})
     soup = BeautifulSoup(response.text, 'html.parser')
 
     results = []
