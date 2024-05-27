@@ -17,6 +17,8 @@ async function searchNews(query) {
         const daumResultsSection = document.getElementById('daum-results');
         const googleResultsSection = document.getElementById('google-results');
 
+        const bannerContainer = document.getElementById('banner-container'); // 쿠팡 배너 컨테이너
+
         // 검색할 때마다 결과를 초기화
         naverResultsBody.innerHTML = '';
         daumResultsBody.innerHTML = '';
@@ -64,8 +66,10 @@ async function searchNews(query) {
         const resultsContainer = document.getElementById('results-container');
         if (hasResults) {
             resultsContainer.style.display = 'block';
+            bannerContainer.style.display = 'block'; // 검색 결과가 있으면 쿠팡 배너 표시
         } else {
             resultsContainer.style.display = 'none';
+            bannerContainer.style.display = 'none'; // 검색 결과가 없으면 쿠팡 배너 숨김
         }
 
         // h2에 색상 적용
@@ -79,11 +83,11 @@ async function searchNews(query) {
         alert('An error occurred while fetching search results. Please try again.');
     }
 }
-
 document.addEventListener('DOMContentLoaded', function() {
     const searchButton = document.querySelector('.search-box button');
     const newsButton = document.getElementById('news-button');
     const exclusiveButton = document.getElementById('exclusive-button');
+    
 
     searchButton.addEventListener('click', function() {
         const query = document.getElementById('search-query').value;
