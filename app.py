@@ -25,14 +25,6 @@ def check_url_blocked(url):
     except requests.exceptions.RequestException as e:
         send_message("An error occurred:", e)
 
-# 테스트할 URL 입력
-url_to_check1 = "https://www.naver.com"
-url_to_check2 = "https://search.naver.com/search.naver"
-
-
-# URL 차단 여부 확인
-check_url_blocked(url_to_check1)
-check_url_blocked(url_to_check2)
 
 
 
@@ -41,7 +33,7 @@ def crawl_naver_news(search_query):
     base_url = "https://search.naver.com/search.naver"
     params = {"query": search_query, "where": "news"}
      
-    response = requests.get(base_url, params=params, headers={'User-agent': 'Mozilla/5.0'})
+    response = requests.get(base_url, params=params, headers={'User-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'})
     soup = BeautifulSoup(response.text, 'html.parser')
 
     results = []
@@ -75,7 +67,7 @@ def crawl_daum_news(search_query):
     base_url = "https://search.daum.net/search"
     params = {"nil_suggest": "btn", "w": "news", "DA": "SBC", "q": search_query}
     
-    response = requests.get(base_url, params=params, headers={'User-agent': 'Mozilla/5.0'})
+    response = requests.get(base_url, params=params)
     soup = BeautifulSoup(response.text, 'html.parser')
 
     results = []
