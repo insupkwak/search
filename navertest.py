@@ -11,21 +11,34 @@ def crawl_naver_news(search_query):
     
     results = []
     
-    for item in soup.select('.sp_nnews .news_wrap .news_area'):
+    # for item in soup.select('.sp_nnews .news_wrap .news_area'):
+    #     title_tag = item.select_one('.news_tit')
+    #     title = title_tag.get_text(strip=True) if title_tag else 'No title'
+    #     link = title_tag['href'] if title_tag else 'No link'
+
+
+    for item in soup.select('div.news_contents'):
         title_tag = item.select_one('.news_tit')
-        title = title_tag.get_text(strip=True) if title_tag else 'No title'
-        link = title_tag['href'] if title_tag else 'No link'
+
+    
+        if title_tag:
+            title = title_tag.get_text(strip=True)   
+            link = title_tag['href']
         
-        # 각 뉴스 기사에 대해 날짜 정보를 가져옴
-        info_span = item.select_one('span.info')
-        info_text = info_span.get_text(strip=True) if info_span else 'No date'
+        results.append({'title': title, 'link': link})
+    
+    i=0
+
+    for item in soup.select('div.info_group'):
+
+        news = item.find('a', class_='info press').text.strip()
+        date = item.find('span', class_='info').text.strip()
+
+        results[i]['news'] = news
+        results[i]['date'] = date
         
-        # 추가 정보 가져오기
-        news_div = item.select_one('div.info_group')
-        news_info_span = news_div.select_one('.info.press')
-        news_info = news_info_span.get_text(strip=True) if news_info_span else 'No news info'
-        
-        results.append({'title': title, 'link': link, 'date': info_text, 'news': news_info})
+        i += 1
+
     
     return results
 
