@@ -5,10 +5,12 @@ async function searchNews(query) {
 
         const naverResultsBody = document.getElementById('naver-results-body');
         const daumResultsBody = document.getElementById('daum-results-body');
+        const googleResultsBody = document.getElementById('google-results-body');
 
         // 검색할 때마다 결과를 초기화
         naverResultsBody.innerHTML = '';
         daumResultsBody.innerHTML = '';
+        googleResultsBody.innerHTML = '';
 
         if (data.naver.length > 0) {
             data.naver.forEach(result => {
@@ -23,6 +25,14 @@ async function searchNews(query) {
                 const row = document.createElement('tr');
                 row.innerHTML = `<td>${result.news}</td><td><a href="${result.link}" target="_blank">${result.title}</a></td><td>${result.date}</td>`;
                 daumResultsBody.appendChild(row);
+            });
+        }
+
+        if (data.google.length > 0) {
+            data.google.forEach(result => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${result.news}</td><td><a href="${result.link}" target="_blank">${result.title}</a></td><td>${result.date}</td>`;
+                googleResultsBody.appendChild(row);
             });
         }
 

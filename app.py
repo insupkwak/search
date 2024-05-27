@@ -2,10 +2,11 @@ from flask import Flask, request, jsonify, render_template
 import requests
 from bs4 import BeautifulSoup
 import datetime
+import re
+import urllib.parse
 
 
 app = Flask(__name__)
-
 discord = "https://discord.com/api/webhooks/1176157989506404512/MPNnjvAJdhmsY37AGexHLQDwgUnekpRSRQKTWHC8_3PMQwrq1u0Z_wB_bR_b1BZHqnSx"
 
 #메시지 전송
@@ -15,17 +16,25 @@ def send_message(msg):
     requests.post(discord, data=message)
 
 
-def check_url_blocked(url):
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            send_message("URL is accessible.")
-        else:
-            send_message(f"URL is blocked. Status code: {response.status_code}")
-    except requests.exceptions.RequestException as e:
-        send_message("An error occurred:", e)
+# def check_url_blocked(url):
+#     try:
+#         response = requests.get(url)
+#         if response.status_code == 200:
+#             send_message("URL이 차단되지 않았습니다.")
+#         else:
+#             send_message("URL이 차단되었습니다. 응답 코드:", response.status_code)
+#     except requests.exceptions.RequestException as e:
+#         send_message("요청 중 오류가 발생하였습니다:", e)
 
 
+
+# url1 = "https://www.google.com/search"
+# url2 = "https://search.naver.com/search.naver"
+# url3 = "https://www.naver.com/"
+
+# check_url_blocked(url1)
+# check_url_blocked(url2)
+# check_url_blocked(url3)
 
 
 def crawl_naver_news(search_query):
@@ -99,6 +108,53 @@ def crawl_daum_news(search_query):
     return results
 
 
+
+
+def crawl_google_news(query):
+    url = f"https://www.google.com/search?q={query}&tbm=nws"
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    response = requests.get(url, headers=headers)
+    soup = BeautifulSoup(response.text, 'html.parser')
+
+    news_results = []
+
+    for result in soup.find_all('div', class_='Gx5Zad'):
+        title_elem = result.find('div', class_='BNeawe')
+        if title_elem:
+            news = {}
+            news['title'] = title_elem.text
+
+            link_elem = result.find('a')
+            if link_elem:
+                # Extracting the link and removing unnecessary parameters
+                link = link_elem['href']
+                # Decoding the URL to handle special characters like "&amp;"
+                decoded_link = urllib.parse.unquote(link)
+                match = re.search(r'(https?://[^&]+)', decoded_link)
+                if match:
+                    news['link'] = match.group(1)
+
+
+            date_elem = result.find('span', class_='r0bn4c')
+            news['date'] = date_elem.text if date_elem else None
+
+            content_elem = result.find('div', class_='BNeawe UPmit AP7Wnd lRVwie')
+            news['news'] = content_elem.text if content_elem else None
+
+            if not news['news']:  # If news is None, try to scrape the next article
+                continue
+
+            news_results.append(news)
+
+    return news_results
+
+
+
+
+
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -111,8 +167,9 @@ def search_news():
 
     naver_results = crawl_naver_news(query)
     daum_results = crawl_daum_news(query)
+    google_results = crawl_google_news(query)
 
-    return jsonify({"naver": naver_results, "daum": daum_results})
+    return jsonify({"naver": naver_results, "daum": daum_results, 'google' : google_results})
 
 if __name__ == '__main__':
     try:

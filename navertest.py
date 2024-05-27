@@ -3,10 +3,10 @@ from bs4 import BeautifulSoup
 
 
 def crawl_naver_news(search_query):
-    base_url = "https://search.naver.com/search.naver"
+    base_url = "https://search.naver.com/search.naver" 
     params = {"query": search_query, "where": "news"}
     
-    response = requests.get(base_url, params=params)
+    response = requests.get(base_url, params=params, headers={'User-agent': 'Mozilla/5.0'})
     soup = BeautifulSoup(response.text, 'html.parser')
     
     results = []

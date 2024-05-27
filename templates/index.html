@@ -14,12 +14,12 @@
     <div class="container">
         <div class="search-box">
             <input type="text" id="search-query" placeholder="Enter search query">
-            <button>검색</button>
+            <button id="search-button">검색</button>
             <button id="news-button">속보</button>
         </div>
         <div class="results-container" style="display: none;" id="results-container">
-            <div class="results" id="naver-results">
-                <h2>Naver News</h2>
+            <div class="results" id="google-results">
+                <h2>Google News</h2>
                 <table>
                     <thead>
                         <tr>
@@ -28,7 +28,7 @@
                             <th>Date</th>
                         </tr>
                     </thead>
-                    <tbody id="naver-results-body">
+                    <tbody id="google-results-body">
                     </tbody>
                 </table>
             </div>
@@ -43,6 +43,20 @@
                         </tr>
                     </thead>
                     <tbody id="daum-results-body">
+                    </tbody>
+                </table>
+            </div>
+            <div class="results" id="naver-results">
+                <h2>Naver News</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>News</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="naver-results-body">
                     </tbody>
                 </table>
             </div>
