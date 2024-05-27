@@ -15,32 +15,16 @@ def send_message(msg):
     requests.post(discord, data=message)
 
 
-
 def crawl_naver_news(search_query):
-
-    send_message("시작")
 
     base_url = "https://search.naver.com/search.naver"
     params = {"query": search_query, "where": "news"}
-
-    send_message("접속성공")
-    
+     
     response = requests.get(base_url, params=params)
-
-    send_message(response)
-
     soup = BeautifulSoup(response.text, 'html.parser')
 
     results = []
     
-
-
-    # for item in soup.select('.sp_nnews .news_wrap .news_area'):
-    #     title_tag = item.select_one('.news_tit')
-    #     title = title_tag.get_text(strip=True) if title_tag else 'No title'
-    #     link = title_tag['href'] if title_tag else 'No link'
-
-
     for item in soup.select('div.news_contents'):
         title_tag = item.select_one('.news_tit')
     
