@@ -17,10 +17,18 @@ def send_message(msg):
 
 
 def crawl_naver_news(search_query):
+
+    send_message("시작")
+
     base_url = "https://search.naver.com/search.naver"
     params = {"query": search_query, "where": "news"}
+
+    send_message("접속성공")
     
     response = requests.get(base_url, params=params)
+
+    send_message(response)
+
     soup = BeautifulSoup(response.text, 'html.parser')
 
     results = []
@@ -35,9 +43,6 @@ def crawl_naver_news(search_query):
 
     for item in soup.select('div.news_contents'):
         title_tag = item.select_one('.news_tit')
-
-        send_message(title_tag)
-
     
         if title_tag:
             title = title_tag.get_text(strip=True)   
@@ -57,7 +62,7 @@ def crawl_naver_news(search_query):
         
         i += 1
 
-    send_message(results)
+  
     return results
 
 
