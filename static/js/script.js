@@ -1,3 +1,9 @@
+function applyColorsToText(text, colors) {
+    return text.split('').map((char, index) => {
+        return `<span class="${colors[index % colors.length]}">${char}</span>`;
+    }).join('');
+}
+
 async function searchNews(query) {
     try {
         const response = await fetch(`/search?query=${query}`);
@@ -62,6 +68,12 @@ async function searchNews(query) {
             resultsContainer.style.display = 'none';
         }
 
+        // h2에 색상 적용
+        document.getElementById('google-results').querySelector('h2').innerHTML = applyColorsToText('Google', ['google-color-1', 'google-color-2', 'google-color-3', 'google-color-4', 'google-color-5', 'google-color-6']);
+        document.getElementById('daum-results').querySelector('h2').innerHTML = applyColorsToText('Daum', ['daum-color-1', 'daum-color-2', 'daum-color-3', 'daum-color-4']);
+        document.getElementById('naver-results').querySelector('h2').innerHTML = 'Naver'.split('').map(char => `<span class="naver-color">${char}</span>`).join('');
+
+
     } catch (error) {
         console.error('Error fetching search results:', error);
         alert('An error occurred while fetching search results. Please try again.');
@@ -71,6 +83,7 @@ async function searchNews(query) {
 document.addEventListener('DOMContentLoaded', function() {
     const searchButton = document.querySelector('.search-box button');
     const newsButton = document.getElementById('news-button');
+    const exclusiveButton = document.getElementById('exclusive-button');
 
     searchButton.addEventListener('click', function() {
         const query = document.getElementById('search-query').value;
@@ -83,6 +96,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     newsButton.addEventListener('click', function() {
         searchNews('속보');
+    });
+
+    exclusiveButton.addEventListener('click', function() {
+        searchNews('단독');
     });
 
     const searchInput = document.getElementById('search-query');
