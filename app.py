@@ -1,9 +1,19 @@
 from flask import Flask, request, jsonify, render_template
 import requests
 from bs4 import BeautifulSoup
+import datetime
 
 
 app = Flask(__name__)
+
+discord = "https://discord.com/api/webhooks/1176157989506404512/MPNnjvAJdhmsY37AGexHLQDwgUnekpRSRQKTWHC8_3PMQwrq1u0Z_wB_bR_b1BZHqnSx"
+
+#메시지 전송
+def send_message(msg):
+    now = datetime.datetime.now()
+    message = {"content": f"[{now.strftime('%H:%M')}] {str(msg)}"}
+    requests.post(discord, data=message)
+
 
 
 def crawl_naver_news(search_query):
@@ -12,9 +22,11 @@ def crawl_naver_news(search_query):
     
     response = requests.get(base_url, params=params)
     soup = BeautifulSoup(response.text, 'html.parser')
-    
+
     results = []
     
+
+
     # for item in soup.select('.sp_nnews .news_wrap .news_area'):
     #     title_tag = item.select_one('.news_tit')
     #     title = title_tag.get_text(strip=True) if title_tag else 'No title'
@@ -23,6 +35,8 @@ def crawl_naver_news(search_query):
 
     for item in soup.select('div.news_contents'):
         title_tag = item.select_one('.news_tit')
+
+        send_message(title_tag)
 
     
         if title_tag:
@@ -43,6 +57,7 @@ def crawl_naver_news(search_query):
         
         i += 1
 
+    send_message(results)
     return results
 
 
