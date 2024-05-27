@@ -110,3 +110,20 @@ body {
     background-color: rgba(0, 0, 0, 0.1); /* 호버 시 배경색 변경 */
     transition: background-color 0.3s ease; /* 애니메이션 효과 추가 */
 }
+
+/* Google News 색상 */
+.google-color-1 { color: #4285F4; } /* 파란색 */
+.google-color-2 { color: #EA4335; } /* 빨간색 */
+.google-color-3 { color: #FBBC05; } /* 오렌지 */
+.google-color-4 { color: #4285F4; } /* 파란색 */
+.google-color-5 { color: #34A853; } /* 그린 */
+.google-color-6 { color: #EA4335; } /* 빨간색 */
+
+/* Daum News 색상 */
+.daum-color-1 { color: #0066FF; } /* 파란색 */
+.daum-color-2 { color: #34A853; } /* 그린 */
+.daum-color-3 { color: #FBBC05; } /* 오렌지 */
+.daum-color-4 { color: #EA4335; } /* 빨간색 */
+
+/* Naver News 색상 */
+.naver-color { color: #2DB400; } /* 네이버 그린 */

@@ -1,3 +1,9 @@
+function applyColorsToText(text, colors) {
+    return text.split('').map((char, index) => {
+        return `<span class="${colors[index % colors.length]}">${char}</span>`;
+    }).join('');
+}
+
 async function searchNews(query) {
     try {
         const response = await fetch(`/search?query=${query}`);
@@ -36,13 +42,14 @@ async function searchNews(query) {
             });
         }
 
-        // 결과가 있는지 확인하고 results-container를 보이거나 숨김
+        // 결과가 있으면 results-container를 보이게 함
         const resultsContainer = document.getElementById('results-container');
-        if (data.naver.length > 0 || data.daum.length > 0 || data.google.length > 0) {
-            resultsContainer.style.display = 'block';
-        } else {
-            resultsContainer.style.display = 'none';
-        }
+        resultsContainer.style.display = (data.naver.length > 0 || data.daum.length > 0 || data.google.length > 0) ? 'block' : 'none';
+
+        // h2에 색상 적용
+        document.getElementById('google-results').querySelector('h2').innerHTML = applyColorsToText('Google News', ['google-color-1', 'google-color-2', 'google-color-3', 'google-color-4', 'google-color-5', 'google-color-6']);
+        document.getElementById('daum-results').querySelector('h2').innerHTML = applyColorsToText('Daum News', ['daum-color-1', 'daum-color-2', 'daum-color-3', 'daum-color-4']);
+        document.getElementById('naver-results').querySelector('h2').innerHTML = 'Naver News'.split('').map(char => `<span class="naver-color">${char}</span>`).join('');
 
     } catch (error) {
         console.error('Error fetching search results:', error);
