@@ -36,9 +36,13 @@ async function searchNews(query) {
             });
         }
 
-        // 결과가 있으면 results-container를 보이게 함
+        // 결과가 있는지 확인하고 results-container를 보이거나 숨김
         const resultsContainer = document.getElementById('results-container');
-        resultsContainer.style.display = 'block';
+        if (data.naver.length > 0 || data.daum.length > 0 || data.google.length > 0) {
+            resultsContainer.style.display = 'block';
+        } else {
+            resultsContainer.style.display = 'none';
+        }
 
     } catch (error) {
         console.error('Error fetching search results:', error);
