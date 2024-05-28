@@ -99,11 +99,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     newsButton.addEventListener('click', function() {
-        searchNews('속보');
+        searchNews('[속보]');
     });
 
     exclusiveButton.addEventListener('click', function() {
-        searchNews('단독');
+        searchNews('[단독]');
     });
 
     const searchInput = document.getElementById('search-query');
@@ -117,4 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
 });
+
+

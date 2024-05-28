@@ -1,7 +1,9 @@
 body {
     background-image: url('/static/images/space.jpg');
     background-size: cover; /* 배경 이미지가 창에 꽉 차도록 설정 */
-
+    background-position: top; /* 상단에 배경 이미지 정렬 */
+    background-attachment: fixed; /* 스크롤 시 배경 이미지 고정 */
+    
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -10,7 +12,6 @@ body {
     align-items: center;
     background-color: white;
 }
-
 .container {    
     width: 95%;
     max-width: 1200px;
@@ -127,3 +128,13 @@ body {
 
 /* Naver News 색상 */
 .naver-color { color: #2DB400; } /* 네이버 그린 */
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+#banner-container {
+    border-radius: 10px; /* 모서리를 라운드 처리 */
+
+    overflow: hidden; /* 내용이 모서리를 벗어나지 않도록 설정 */
+}

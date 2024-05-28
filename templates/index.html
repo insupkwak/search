@@ -13,14 +13,14 @@
 <body>
     <div class="container">
         <div class="search-box">
-            <input type="text" id="search-query" placeholder="Enter search query">
+            <input type="text" id="search-query" placeholder="검색어">
             <button id="search-button">검색</button>
             <button id="exclusive-button">단독</button>
             <button id="news-button">속보</button>
         </div>
         <div class="results-container" style="display: none;" id="results-container">
             <div class="results" id="google-results">
-                <h2>Google</h2>
+                <h2><a href="https://www.google.com/">Google</a></h2>
                 <table>
                     <thead>
                         <tr>
@@ -34,7 +34,7 @@
                 </table>
             </div>
             <div class="results" id="daum-results">
-                <h2>Daum</h2>
+                <h2><a href="https://www.daum.net/">Daum</a></h2>
                 <table>
                     <thead>
                         <tr>
@@ -48,7 +48,7 @@
                 </table>
             </div>
             <div class="results" id="naver-results">
-                <h2>NAVER</h2>
+                <h2 class="uppercase"><a href="https://www.naver.com/"></a>NAVER</h2>
                 <table>
                     <thead>
                         <tr>
@@ -62,7 +62,11 @@
                 </table>
             </div>
         </div>
+    
+       
+    
     </div>
+
 
     <div id="banner-container" style="display: none;">
         <script src="https://ads-partners.coupang.com/g.js"></script>
@@ -70,6 +74,7 @@
             new PartnersCoupang.G({"id":778650,"template":"carousel","trackingCode":"AF6082287","width":"400","height":"140","tsource":""});
         </script>
     </div>
+
 
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
