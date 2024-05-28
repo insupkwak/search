@@ -12,10 +12,14 @@ body {
     align-items: center;
     background-color: white;
 }
-.container {    
-    width: 95%;
-    max-width: 1200px;
-    margin-top: 50px;
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 수직 가운데 정렬 */
+    align-items: center; /* 수평 가운데 정렬 */
+    width: 95%; /* 전체 너비의 95% 사용 */
+    max-width: 1200px; /* 최대 너비는 1200px로 제한 */
+    margin: 50px auto; /* 상하 여백은 50px, 좌우 여백은 자동으로 설정 */
 }
 
 .search-box {
@@ -23,6 +27,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    flex-grow: 1; /* 가능한 최대 공간을 차지 */
 }
 
 .search-box input {
